@@ -1,10 +1,12 @@
 <template>
-  <Homepage/>
+  <Homepage />
 </template>
 
 <script>
 import Homepage from '~/components/Homepage.vue'
-export default {}
+export default {
+  components: {
+    Homepage,
+  },
+}
 </script>
-
-Homepage

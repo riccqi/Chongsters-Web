@@ -15,7 +15,7 @@
     >
       {{ id }}
     </div>
-    <div class="p-3">
+    <div class="p-3 flex-grow">
       <p class="flex justify-start mb-2">
         {{ question }}
       </p>
@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref, watch } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 import iconHeart from '@/assets/iconHeart.vue'
 
 export default defineComponent({
@@ -145,10 +145,6 @@ export default defineComponent({
         console.log(text)
         input.value = text
       })
-    })
-
-    watch(input, (newval) => {
-      console.log(newval)
     })
 
     function record() {
