@@ -15,7 +15,7 @@
     >
       {{ id }}
     </div>
-    <div class="p-3 flex-grow">
+    <div class="p-3 flex-grow w-80">
       <p class="flex justify-start mb-2">
         {{ question }}
       </p>
@@ -158,6 +158,7 @@ export default defineComponent({
     }
 
     const sendInput = async () => {
+      input.value = ''
       const data = { id: props.id, answer: input.value }
       const response = await root.$axios.post(
         'https://chong-testbot.herokuapp.com/answer',

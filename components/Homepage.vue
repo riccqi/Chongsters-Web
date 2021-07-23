@@ -28,7 +28,7 @@
       />
     </div>
     <div class="flex justify-center">
-      <p class="text-gray-500 text-xs absolute bottom-0 mb-4 mx-auto">
+      <p class="text-gray-500 text-xs mt-auto">
         &copy;2021 Chongsters. All rights reserved.
       </p>
     </div>
