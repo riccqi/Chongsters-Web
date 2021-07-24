@@ -1,14 +1,13 @@
 <template>
   <main>
     <div
-      class="flex justify-between items-center bg-yellow-200 w-full h-auto px-8"
+      class="flex justify-between items-center bg-yellow-300 w-full h-auto px-8"
     >
       <div class="flex items-center">
-        <img src="~/assets/gitlab.svg" alt="logo" width="50" />
-        <div class="font-bold text-lg">TeleAsk</div>
+        <div class="font-heavy text-lg h-10 mt-2">TeleAsk</div>
       </div>
 
-      <p class="mx-2 font-bold">Room 201923</p>
+      <p class="mx-2 font-bold">Room 240721</p>
     </div>
 
     <p class="font-bold text-lg bg-white text-center py-4 w-full h-auto">

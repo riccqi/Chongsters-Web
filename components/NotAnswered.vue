@@ -15,13 +15,7 @@
         />
       </div>
     </template>
-    <div
-      v-else-if="questions.length === 0 && questions != undefined"
-      class="my-40 lg:my-64"
-    >
-      <p class="text-center font-semibold">All questions have been answered</p>
-    </div>
-    <div v-else>
+    <div class="my-8" v-else>
       <spinner />
     </div>
     <div class="flex justify-center">

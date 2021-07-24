@@ -17,7 +17,7 @@
     <div v-else-if="questions.length === 0">
       <p class="text-center font-semibold">No questions have been answered</p>
     </div>
-    <div v-else>
+    <div class="my-8" v-else>
       <spinner />
     </div>
     <div class="flex justify-center">
