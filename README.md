@@ -1,5 +1,7 @@
 # Chongsters-Web
 
+This is the Chongsters frontend website made with Nuxt.js, Tailwind CSS and Axios.
+
 ## Build Setup
 
 ```bash
