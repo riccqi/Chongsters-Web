@@ -4,7 +4,7 @@
       class="flex justify-between items-center bg-yellow-300 w-full h-auto px-8"
     >
       <div class="flex items-center">
-        <div class="font-heavy text-lg h-10 mt-2">TeleAsk</div>
+        <div class="font-extrabold text-lg h-10 mt-2">TeleAsk</div>
       </div>
 
       <p class="mx-2 font-bold">Room 240721</p>
