@@ -1,6 +1,8 @@
 <template>
   <main>
-    <div class="flex justify-between items-center bg-yellow-200 w-full h-auto">
+    <div
+      class="flex justify-between items-center bg-yellow-200 w-full h-auto px-8"
+    >
       <div class="flex items-center">
         <img src="~/assets/gitlab.svg" alt="logo" width="50" />
         <div class="font-bold text-lg">TeleAsk</div>
@@ -15,18 +17,18 @@
 
     <md-tabs md-alignment="centered">
       <md-tab id="tab-unans" md-label="Unanswered">
-        <NotAnswered />
+        <NotAnswered :questions="unanswered" @refetch-text="fetchQuestions" />
       </md-tab>
 
       <md-tab id="tab-ans" md-label="Answered">
-        <Answered />
+        <Answered :questions="answered" />
       </md-tab>
     </md-tabs>
   </main>
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 import Answered from '@/components/Answered.vue'
 import NotAnswered from '@/components/NotAnswered.vue'
 
@@ -37,6 +39,41 @@ export default defineComponent({
     NotAnswered,
   },
 
-  setup(props, { root }) {},
+  setup(props, { root }) {
+    const answered = ref([])
+    const unanswered = ref([])
+
+    async function fetchQuestions() {
+      try {
+        answered.value = []
+        unanswered.value = []
+        const res = await root.$axios.get(
+          'https://chong-testbot.herokuapp.com/retrieve'
+        )
+        const dataQueried = res.data
+
+        for (const i of dataQueried) {
+          // eslint-disable-next-line eqeqeq
+          if (i.question_answer == undefined) {
+            unanswered.value.push(i)
+          } else {
+            answered.value.push(i)
+          }
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    onMounted(() => {
+      fetchQuestions()
+    })
+
+    return {
+      fetchQuestions,
+      answered,
+      unanswered,
+    }
+  },
 })
 </script>

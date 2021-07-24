@@ -3,7 +3,7 @@
     <template v-if="questions.length !== 0">
       <div
         v-for="question in questions"
-        :key="question.id"
+        :key="question.question_id"
         class="m-3 flex flex-wrap justify-center md:m-0"
       >
         <QuestionCard
@@ -11,7 +11,6 @@
           :question="question.question_text"
           :answer="question.question_answer"
           :likes="question.subscription_count"
-          @refetch="fetchQuestions"
         />
       </div>
     </template>
@@ -30,7 +29,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import QuestionCard from '@/components/QuestionCard.vue'
 import spinner from '~/assets/spinner.vue'
 
@@ -40,34 +39,12 @@ export default defineComponent({
     QuestionCard,
     spinner,
   },
-  setup(props, { root }) {
-    const questions = ref([])
-    onMounted(() => {
-      fetchQuestions()
-    })
-    async function fetchQuestions() {
-      try {
-        const res = await root.$axios.get(
-          'https://chong-testbot.herokuapp.com/retrieve'
-        )
-        console.log('hello there')
-        const dataQueried = res.data
-        for (const i of dataQueried) {
-          // eslint-disable-next-line eqeqeq
-          if (i.question_answer != undefined) {
-            questions.value.push(i)
-          }
-        }
-        console.log(res.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    return {
-      fetchQuestions,
-      questions,
-    }
+  props: {
+    questions: {
+      type: Array,
+      required: true,
+    },
   },
+  setup(props, { root }) {},
 })
 </script>

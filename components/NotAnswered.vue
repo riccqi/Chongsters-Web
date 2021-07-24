@@ -11,7 +11,7 @@
           :question="question.question_text"
           :answer="question.question_answer"
           :likes="question.subscription_count"
-          @refetch="fetchQuestions"
+          v-on="$listeners"
         />
       </div>
     </template>
@@ -33,47 +33,22 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import QuestionCard from '@/components/QuestionCard.vue'
 import spinner from '~/assets/spinner.vue'
 
 export default defineComponent({
-  name: 'Answered',
+  name: 'NotAnswered',
   components: {
     QuestionCard,
     spinner,
   },
-  setup(props, { root }) {
-    const questions = ref([])
-    onMounted(() => {
-      fetchQuestions()
-    })
-
-    async function fetchQuestions() {
-      console.log('hellow hwyuwwh')
-      try {
-        const res = await root.$axios.get(
-          'https://chong-testbot.herokuapp.com/retrieve'
-        )
-        const dataQueried = res.data
-
-        for (const i of dataQueried) {
-          // eslint-disable-next-line eqeqeq
-          if (i.question_answer == undefined) {
-            questions.value.push(i)
-          }
-        }
-
-        console.log(res.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    return {
-      fetchQuestions,
-      questions,
-    }
+  props: {
+    questions: {
+      type: Array,
+      required: true,
+    },
   },
+  setup(props, { root }) {},
 })
 </script>

@@ -16,7 +16,7 @@
       {{ id }}
     </div>
     <div class="p-3 flex-grow w-80 md:w-96">
-      <p class="flex justify-start mb-2">
+      <p class="flex justify-start mb-2 font-semibold">
         {{ question }}
       </p>
       <div v-if="answer == undefined" class="flex justify-start mb-2">
@@ -128,7 +128,9 @@ export default defineComponent({
       default: undefined,
     },
   },
-  setup(props, { root }) {
+  emits: ['refetch-text'],
+
+  setup(props, context) {
     const isRecording = ref(false)
     const speech = ref()
     const input = ref('')
@@ -144,7 +146,6 @@ export default defineComponent({
           .map((result) => result[0])
           .map((results) => results.transcript)
           .join('')
-        console.log(text)
         input.value = text
       })
     })
@@ -161,12 +162,12 @@ export default defineComponent({
 
     const sendInput = async () => {
       const data = { id: props.id, answer: input.value }
-      const response = await root.$axios.post(
+      const response = await context.root.$axios.post(
         'https://chong-testbot.herokuapp.com/answer',
         data
       )
 
-      root.$emit('refetch-text')
+      context.emit('refetch-text', true)
 
       input.value = ''
       return response.data
