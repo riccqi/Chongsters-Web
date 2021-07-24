@@ -3,7 +3,7 @@
     <div
       class="
         font-bold
-        px-2
+        px-2.5
         bg-blue-500
         h-full
         text-white
@@ -15,7 +15,7 @@
     >
       {{ id }}
     </div>
-    <div class="p-3 flex-grow w-80">
+    <div class="p-3 flex-grow w-80 md:w-96">
       <p class="flex justify-start mb-2">
         {{ question }}
       </p>
@@ -43,10 +43,16 @@
             p-2
             rounded-xl
             block
+            mr-1
           "
           @click="record"
         >
-          Start
+          <img
+            class=""
+            src="~/assets/microphone.svg"
+            width="14"
+            alt="microphone"
+          />
         </button>
         <button
           v-else
@@ -58,6 +64,7 @@
             p-2
             rounded-xl
             block
+            mr-1
           "
           @click="end"
         >
@@ -122,11 +129,6 @@ export default defineComponent({
     },
   },
   setup(props, { root }) {
-    // if ('webkitSpeechRecognition' in window) {
-    //   // speech recognition API supported
-    // } else {
-    //   // speech recognition API not supported
-    // }
     const isRecording = ref(false)
     const speech = ref()
     const input = ref('')
@@ -158,12 +160,15 @@ export default defineComponent({
     }
 
     const sendInput = async () => {
-      input.value = ''
       const data = { id: props.id, answer: input.value }
       const response = await root.$axios.post(
         'https://chong-testbot.herokuapp.com/answer',
         data
       )
+
+      root.$emit('refetch-text')
+
+      input.value = ''
       return response.data
     }
 
