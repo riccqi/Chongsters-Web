@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
-    "newrelic": "^7.5.2",
+    "newrelic": "^8.0.0",
     "nuxt": "^2.15.7",
     "vue-material": "^1.0.0-beta-15",
     "vue-session": "^1.0.0"
